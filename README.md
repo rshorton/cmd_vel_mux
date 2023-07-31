@@ -2,6 +2,10 @@
 
 ## About
 
+Fork of cmd_vel_mux package from https://github.com/rshorton/cmd_vel_mux.  This fork allows the output topic to be specified.
+<hr>
+<br>
+
 A ROS 2 package for selecting among a number of incoming geometry_msg/msg/Twist messages, choosing the highest
 priority one to republish on the output topic.  It will automatically dislodge streams that are lower
 priority or that stop publishing for any reason.  The stream currently in use is published on the
