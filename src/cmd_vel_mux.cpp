@@ -91,8 +91,10 @@ CmdVelMux::CmdVelMux(rclcpp::NodeOptions options)
     add_on_set_parameters_callback(
     std::bind(&CmdVelMux::parameterUpdate, this, std::placeholders::_1));
 
-  output_topic_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
-  RCLCPP_DEBUG(get_logger(), "CmdVelMux : subscribe to output topic 'cmd_vel'");
+  std::string output_topic = get_parameter("output_topic").as_string();
+
+  output_topic_pub_ = this->create_publisher<geometry_msgs::msg::Twist>(output_topic, 10);
+  RCLCPP_DEBUG(get_logger(), "CmdVelMux : subscribe to output topic %s", output_topic.c_str());
 
   active_subscriber_pub_ = this->create_publisher<std_msgs::msg::String>(
     "active", rclcpp::QoS(1).transient_local());    // latched topic
